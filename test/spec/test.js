@@ -1,9 +1,10 @@
 require.config({
   paths: {
+    app: '../../scripts'
   }
 });
 
-require([], function() {
+require(['simon'], function() {
   mocha.run();
 });
 
