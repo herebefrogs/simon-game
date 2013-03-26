@@ -8,16 +8,23 @@
 <body>
     <div id="mocha"></div>
     <script src="lib/mocha/mocha.js"></script>
-    <script>mocha.setup('bdd')</script>
+    <script>
+      mocha.setup({
+        ui: 'bdd',
+        bail: false
+      });
+    </script>
+
     <!-- assertion framework -->
     <script src="lib/chai.js"></script>
-    <script>var expect = chai.expect</script>
+    <script>
+      var expect = chai.expect;
+      var should = chai.should();
+      var assert = chai.assert;
+    </script>
 
-    <!-- include source files here... -->
+    <!-- load spec files asynchronously -->
+    <script data-main="spec/test" src="components/requirejs/require.js"></script>
 
-    <!-- include spec files here... -->
-    <script src="spec/test.js"></script>
-
-    <script>mocha.run()</script>
 </body>
 </html>
