@@ -68,7 +68,8 @@ module.exports = function (grunt) {
                     middleware: function (connect) {
                         return [
                             mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test')
+                            mountFolder(connect, 'test'),
+                            mountFolder(connect, 'app')
                         ];
                     }
                 }
@@ -253,6 +254,17 @@ module.exports = function (grunt) {
     grunt.registerTask('server', function (target) {
         if (target === 'dist') {
             return grunt.task.run(['build', 'open', 'connect:dist:keepalive']);
+        }
+
+        if (target === 'test') {
+            return grunt.task.run([
+                'clean:server',
+                'coffee',
+                'compass:server',
+                'connect:test',
+                'open',
+                'watch'
+            ]);
         }
 
         grunt.task.run([
