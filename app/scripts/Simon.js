@@ -4,6 +4,7 @@ define([], function() {
   };
 
   Simon.prototype.newTurn = function() {
+    this.sequence.push(this.pickRandomColor());
   };
 
   Simon.prototype.pickRandomColor = function() {
