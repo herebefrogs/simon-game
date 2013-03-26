@@ -8,5 +8,14 @@ define(['jquery'], function() {
     return this.sequence.length;
   };
 
+  Simon.prototype.pickRandomColor = function() {
+  };
+
+  Simon.prototype.replaySequence = function() {
+  };
+
+  Simon.prototype.nextRound = function() {
+  };
+
   return Simon;
 });
