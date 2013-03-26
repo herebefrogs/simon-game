@@ -3,5 +3,11 @@ define([], function() {
     this.sequence = [];
   };
 
+  Simon.prototype.newTurn = function() {
+  };
+
+  Simon.prototype.pickRandomColor = function() {
+  };
+
   return Simon;
 });
