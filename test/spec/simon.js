@@ -33,5 +33,9 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     it("Simon should add this color at the end of his sequence", function() {
       game.sequence.should.have.length(1);
     });
+
+    it('the new color Simon added to his sequence should be either blue, red, green or yellow', function() {
+      [ 'blue', 'red', 'yellow', 'green' ].should.include(game.sequence[0]);
+    });
   });
 });
