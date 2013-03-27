@@ -51,6 +51,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       simon.sequence.should.have.length(4);
     });
 
+    it('the new entry should be one of the four possible colors/sounds', function() {
+      [ 'blue', 'red', 'yellow', 'green' ].should.include(simon.sequence[3]);
+    });
+
     it('the round number should have increased by 1', function() {
       simon.getRoundNo().should.equal(4);
     });
