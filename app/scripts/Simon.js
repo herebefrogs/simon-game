@@ -11,6 +11,17 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.pickRandomColor = function() {
+    var odd = Math.random();
+
+    if (odd < 0.25) {
+      return 'red';
+    } else if (odd < 0.5) {
+      return 'green';
+    } else if (odd < 0.75) {
+      return 'yellow';
+    } else {
+      return 'blue';
+    }
   };
 
   Simon.prototype.replaySequence = function() {
