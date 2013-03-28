@@ -64,7 +64,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     });
 
     it('the color/sound sequence should be replayed in its entirety', function() {
-      simon.replaySequence.calledOnce.should.equal(true);
+      simon.replaySequence.calledWith(0).should.equal(true);
     });
   });
 });
