@@ -1,10 +1,14 @@
-define(['app/Simon'], function (Simon) {
+define(['app/Simon', 'jquery'], function (Simon) {
   describe('Initial state', function () {
-    var simon = null;
+    var simon = page = null;
 
-    // act
     before(function() {
-      simon = new Simon();
+      // arrange
+      page = $('<div>');
+      page.append('<span id="round"></span>');
+
+      // act
+      simon = new Simon(page);
     });
 
     // assert
@@ -14,6 +18,10 @@ define(['app/Simon'], function (Simon) {
 
     it('the round number should be 0', function() {
       simon.getRoundNo().should.equal(0);
+    });
+
+    it('the round number should be displayed on the page', function() {
+      page.find('#round').text().should.equal('0');
     });
   });
 });

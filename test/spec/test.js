@@ -1,6 +1,7 @@
 require.config({
   paths: {
-    app: '../../scripts'
+    app: '../../scripts',
+    jquery: '../../components/jquery/jquery'
   }
 });
 
