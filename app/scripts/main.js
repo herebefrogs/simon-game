@@ -4,7 +4,8 @@ require.config({
   }
 });
 
-require(['jquery'], function ($) {
+require(['Simon'], function (Simon) {
   'use strict';
-  console.log('Running jQuery %s', $().jquery);
+
+  var simon = new Simon($('body'));
 });

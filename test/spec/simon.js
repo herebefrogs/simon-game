@@ -1,4 +1,4 @@
-define(['app/Simon', 'jquery'], function (Simon) {
+define(['app/Simon'], function (Simon) {
   describe('Initial state', function () {
     var simon = page = null;
 
