@@ -8,4 +8,5 @@ require(['Simon'], function (Simon) {
   'use strict';
 
   var simon = new Simon($('body'));
+  simon.nextRound();
 });

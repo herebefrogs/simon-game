@@ -1,0 +1,78 @@
+@import "mixins";
+
+
+$red-off: #b00;
+$red-on: #f00;
+$green-off: #0b0;
+$green-on: #0f0;
+$blue-off: #009;
+$blue-on: #00f;
+$yellow-off: #bb0;
+$yellow-on: #ff0;
+
+
+@include keyframes(red) {
+  50% {
+    background-color: $red-on;
+  }
+}
+@include keyframes(green) {
+  50% {
+    background-color: $green-on;
+  }
+}
+@include keyframes(blue) {
+  50% {
+    background-color: $blue-on;
+  }
+}
+@include keyframes(yellow) {
+  50% {
+    background-color: $yellow-on;
+  }
+}
+
+
+.controls {
+  width: 400px;
+
+  .button {
+    width: 180px;
+    height: 180px;
+    margin: 10px;
+    float: left;
+  }
+
+  #red {
+    background-color: $red-off;
+
+    &.flash {
+      @include animation(red 1s);
+    }
+  }
+
+  #green {
+    background-color: $green-off;
+
+    &.flash {
+      @include animation(green 1s);
+    }
+  }
+
+  #blue {
+    background-color: $blue-off;
+
+    &.flash {
+      @include animation(blue 1s);
+    }
+  }
+
+  #yellow {
+    background-color: $yellow-off;
+
+    &.flash {
+      @include animation(yellow 1s);
+    }
+  }
+
+}
