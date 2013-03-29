@@ -69,6 +69,10 @@ define(['jquery'], function() {
   Simon.prototype.playerPicked = function(color) {
     if (this.verifyPick(color, this.playerIndex)) {
       this.playerIndex++;
+
+      if (this.playerIndex === this.sequence.length) {
+        this.nextRound();
+      }
     }
   };
 
