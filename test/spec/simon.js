@@ -31,50 +31,52 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
   });
 
   describe('New round', function() {
-    var simon = page = null;
+    describe("Simon's turn", function() {
+      var simon = page = null;
 
-    before(function() {
-      // arrange
-      page = $('<div>');
-      page.append('<span id="round"></span>');
+      before(function() {
+        // arrange
+        page = $('<div>');
+        page.append('<span id="round"></span>');
 
-      simon = new Simon(page);
-      simon.sequence = [ 'blue', 'red', 'red' ];
-      simon.playerIndex = 2;
-      simon.pickRandomColor = sinon.spy(simon, 'pickRandomColor');
-      simon.replaySequence = sinon.spy();
+        simon = new Simon(page);
+        simon.sequence = [ 'blue', 'red', 'red' ];
+        simon.playerIndex = 2;
+        simon.pickRandomColor = sinon.spy(simon, 'pickRandomColor');
+        simon.replaySequence = sinon.spy();
 
-      // act
-      simon.nextRound();
-    });
+        // act
+        simon.nextRound();
+      });
 
-    // assert
-    it('the player sequence should be emptied', function() {
-      simon.playerIndex.should.equal(0);
-    });
+      // assert
+      it('the player sequence should be emptied', function() {
+        simon.playerIndex.should.equal(0);
+      });
 
-    it('a new color/sound should be randomly picked', function() {
-      simon.pickRandomColor.calledOnce.should.equal(true);
-    });
+      it('a new color/sound should be randomly picked', function() {
+        simon.pickRandomColor.calledOnce.should.equal(true);
+      });
 
-    it('the color/sound sequence should contain 1 more entry', function() {
-      simon.sequence.should.have.length(4);
-    });
+      it('the color/sound sequence should contain 1 more entry', function() {
+        simon.sequence.should.have.length(4);
+      });
 
-    it('the new entry should be one of the four possible colors/sounds', function() {
-      [ 'blue', 'red', 'yellow', 'green' ].should.include(simon.sequence[3]);
-    });
+      it('the new entry should be one of the four possible colors/sounds', function() {
+        [ 'blue', 'red', 'yellow', 'green' ].should.include(simon.sequence[3]);
+      });
 
-    it('the round number should have increased by 1', function() {
-      simon.getRoundNo().should.equal(4);
-    });
+      it('the round number should have increased by 1', function() {
+        simon.getRoundNo().should.equal(4);
+      });
 
-    it('the round number should update on the page', function() {
-      page.find('#round').text().should.equal('4');
-    });
+      it('the round number should update on the page', function() {
+        page.find('#round').text().should.equal('4');
+      });
 
-    it('the color/sound sequence should be replayed in its entirety', function() {
-      simon.replaySequence.calledWith(0).should.equal(true);
+      it('the color/sound sequence should be replayed in its entirety', function() {
+        simon.replaySequence.calledWith(0).should.equal(true);
+      });
     });
   });
 });
