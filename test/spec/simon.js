@@ -16,6 +16,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       simon.sequence.should.have.length(0);
     });
 
+    it('the player sequence should be empty', function() {
+      simon.playerIndex.should.equal(0);
+    });
+
     it('the round number should be 0', function() {
       simon.getRoundNo().should.equal(0);
     });
@@ -23,6 +27,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     it('the round number should be displayed on the page', function() {
       page.find('#round').text().should.equal('0');
     });
+
   });
 
   describe('New round', function() {
@@ -35,6 +40,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       simon = new Simon(page);
       simon.sequence = [ 'blue', 'red', 'red' ];
+      simon.playerIndex = 2;
       simon.pickRandomColor = sinon.spy(simon, 'pickRandomColor');
       simon.replaySequence = sinon.spy();
 
@@ -43,6 +49,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     });
 
     // assert
+    it('the player sequence should be emptied', function() {
+      simon.playerIndex.should.equal(0);
+    });
+
     it('a new color/sound should be randomly picked', function() {
       simon.pickRandomColor.calledOnce.should.equal(true);
     });
