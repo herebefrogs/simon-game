@@ -5,10 +5,15 @@ define(['jquery'], function() {
     this.round_el = page.find('#round');
 
     this.updateRoundNo();
+    this.resetPlayerIndex();
   };
 
   Simon.prototype.getRoundNo = function() {
     return this.sequence.length;
+  };
+
+  Simon.prototype.resetPlayerIndex = function() {
+    this.playerIndex = 0;
   };
 
   Simon.prototype.pickRandomColor = function() {
@@ -48,6 +53,8 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.nextRound = function() {
+    this.resetPlayerIndex();
+
     this.sequence.push(this.pickRandomColor());
 
     this.updateRoundNo();
