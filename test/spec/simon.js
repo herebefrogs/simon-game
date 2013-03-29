@@ -79,15 +79,18 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       });
     });
 
+
     describe("Player's turn", function() {
-      var simon = null;
       describe('When the player pick the correct color', function() {
+        var simon = null;
+
         before(function() {
           // arrange
           simon = new Simon($('<div>'));
           simon.sequence = [ 'blue', 'red', 'red' ];
           simon.playerIndex = 0;
           simon.verifyPick = sinon.spy(simon, 'verifyPick');
+          simon.nextRound = sinon.spy();
 
           // act
           simon.playerPicked('blue');
@@ -100,6 +103,30 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
         it('the player sequence should contain 1 more entry', function() {
           simon.playerIndex.should.equal(1);
+        });
+
+        it("Simon should not move on to the next round", function() {
+          simon.nextRound.callCount.should.equal(0);
+        });
+      });
+
+      describe('When the player successfully completes the color/sound sequence', function() {
+        var simon = null;
+
+        before(function() {
+          // arrange
+          simon = new Simon($('div'));
+          simon.sequence = [ 'blue', 'red', 'red' ];
+          simon.playerIndex = 2;
+          simon.nextRound = sinon.spy();
+
+          // act
+          simon.playerPicked('red');
+        });
+
+        // assert
+        it("Simon should move on to the next round", function() {
+          simon.nextRound.callCount.should.equal(1);
         });
       });
     });
