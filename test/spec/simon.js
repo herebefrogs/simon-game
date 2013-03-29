@@ -78,5 +78,30 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         simon.replaySequence.calledWith(0).should.equal(true);
       });
     });
+
+    describe("Player's turn", function() {
+      var simon = null;
+      describe('When the player pick the correct color', function() {
+        before(function() {
+          // arrange
+          simon = new Simon($('<div>'));
+          simon.sequence = [ 'blue', 'red', 'red' ];
+          simon.playerIndex = 0;
+          simon.verifyPick = sinon.spy(simon, 'verifyPick');
+
+          // act
+          simon.playerPicked('blue');
+        });
+
+        // assert
+        it("Simon should verify the player's pick against the color/sound sequence", function() {
+          simon.verifyPick.callCount.should.equal(1);
+        });
+
+        it('the player sequence should contain 1 more entry', function() {
+          simon.playerIndex.should.equal(1);
+        });
+      });
+    });
   });
 });
