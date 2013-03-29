@@ -5,7 +5,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     before(function() {
       // arrange
       page = $('<div>');
-      page.append('<span id="round"></span>');
+      page.append('<span id="round"></span><div id="game-over"></div>');
 
       // act
       simon = new Simon(page);
@@ -28,6 +28,9 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       page.find('#round').text().should.equal('0');
     });
 
+    it('the "Game over" message should be hidden', function() {
+      page.find('#game-over').css('display').should.equal('none');
+    });
   });
 
   describe('New round', function() {
@@ -129,6 +132,60 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
           simon.nextRound.callCount.should.equal(1);
         });
       });
+
+      describe('When the player pick the wrong color', function() {
+        var simon = null;
+
+        before(function() {
+          // arrange
+          simon = new Simon($('<div>'));
+          simon.sequence = [ 'blue', 'red', 'red' ];
+          simon.playerIndex = 1;
+          simon.verifyPick = sinon.spy(simon, 'verifyPick');
+          simon.nextRound = sinon.spy();
+          simon.gameOver = sinon.spy();
+
+          // act
+          simon.playerPicked('green');
+        });
+
+        // assert
+        it("Simon should verify the player's pick against the color/sound sequence", function() {
+          simon.verifyPick.callCount.should.equal(1);
+        });
+
+        it('the player sequence should not contain 1 more entry', function() {
+          simon.playerIndex.should.equal(1);
+        });
+
+        it("Simon should not move on to the next round", function() {
+          simon.nextRound.callCount.should.equal(0);
+        });
+
+        it("Simon should end the game", function() {
+          simon.gameOver.callCount.should.equal(1);
+        });
+      });
+    });
+  });
+
+  describe('Game over', function() {
+    var simon = page = null;
+
+    before(function() {
+      // arrange
+      page = $('<div>');
+      page.html('<div id="game-over" style="display: none;"></div>');
+
+      simon = new Simon(page);
+
+      // act
+      simon.gameOver();
+    });
+
+    // assert
+    it('the "Game over" message should be visible', function() {
+      page.find('#game-over').css('display').should.not.equal('none');
     });
   });
 });
