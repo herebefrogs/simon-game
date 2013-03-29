@@ -62,10 +62,14 @@ define(['jquery'], function() {
     this.replaySequence(0);
   };
 
-  Simon.prototype.verifyPick = function() {
+  Simon.prototype.verifyPick = function(color, i) {
+    return this.sequence[i] === color;
   };
 
-  Simon.prototype.playerPicked = function() {
+  Simon.prototype.playerPicked = function(color) {
+    if (this.verifyPick(color, this.playerIndex)) {
+      this.playerIndex++;
+    }
   };
 
   return Simon;
