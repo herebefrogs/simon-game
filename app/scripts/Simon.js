@@ -62,5 +62,11 @@ define(['jquery'], function() {
     this.replaySequence(0);
   };
 
+  Simon.prototype.verifyPick = function() {
+  };
+
+  Simon.prototype.playerPicked = function() {
+  };
+
   return Simon;
 });
