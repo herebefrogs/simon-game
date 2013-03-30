@@ -5,6 +5,10 @@ define(['jquery'], function() {
     this.round_el = page.find('#round');
     this.game_over_el = page.find('#game-over');
 
+    var _ref = this;
+    page.find('.button').on('click', function(e) {
+      _ref.playerPicked(e.currentTarget.id);
+    });
     this.game_over_el.hide();
     this.updateRoundNo();
     this.resetPlayerIndex();
