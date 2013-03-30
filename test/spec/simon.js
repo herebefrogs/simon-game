@@ -84,6 +84,31 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
 
     describe("Player's turn", function() {
+      describe('When the player click a tile', function() {
+        var simon = page = null;
+
+        before(function() {
+          // arrange
+          page = $('<div>');
+          page.html(
+            '<div id="blue" class="button"></div>' +
+            '<div id="red" class="button"></div>' +
+            '<div id="green" class="button"></div>' +
+            '<div id="yellow" class="button"></div>'
+          );
+
+          simon = new Simon(page);
+          simon.playerPicked = sinon.spy();
+
+          // act
+          page.find('.button').click();
+        });
+
+        it('Simon is told which color the player picked', function() {
+          simon.playerPicked.callCount.should.equal(4);
+        });
+      });
+
       describe('When the player pick the correct color', function() {
         var simon = null;
 
