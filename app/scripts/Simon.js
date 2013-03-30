@@ -3,7 +3,9 @@ define(['jquery'], function() {
     this.sequence = [];
     this.buttons_el = page.find('.controls');
     this.round_el = page.find('#round');
+    this.game_over_el = page.find('#game-over');
 
+    this.game_over_el.hide();
     this.updateRoundNo();
     this.resetPlayerIndex();
   };
@@ -66,6 +68,10 @@ define(['jquery'], function() {
     return this.sequence[i] === color;
   };
 
+  Simon.prototype.gameOver = function() {
+    this.game_over_el.show();
+  };
+
   Simon.prototype.playerPicked = function(color) {
     if (this.verifyPick(color, this.playerIndex)) {
       this.playerIndex++;
@@ -73,6 +79,8 @@ define(['jquery'], function() {
       if (this.playerIndex === this.sequence.length) {
         this.nextRound();
       }
+    } else {
+      this.gameOver();
     }
   };
 
