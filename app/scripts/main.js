@@ -7,6 +7,6 @@ require.config({
 require(['Simon'], function (Simon) {
   'use strict';
 
-  var simon = new Simon($('body'));
+  var simon = new Simon($('html'));
   simon.nextRound();
 });

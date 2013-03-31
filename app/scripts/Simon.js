@@ -1,11 +1,10 @@
 define(['jquery'], function() {
   var Simon = function Simon(page) {
     this.sequence = [];
+    this.page = page;
     this.buttons_el = page.find('.button');
     this.round_el = page.find('#round');
-    this.game_over_el = page.find('#game-over');
 
-    this.game_over_el.hide();
     this.updateRoundNo();
     this.resetPlayerIndex();
   };
@@ -16,13 +15,13 @@ define(['jquery'], function() {
 
   Simon.prototype.listenToPlayerClicks = function() {
     var _ref = this;
-    page.find('.button').on('click', function(e) {
+    this.buttons_el.on('click', function(e) {
       _ref.playerPicked(e.currentTarget.id);
     });
   };
 
   Simon.prototype.stopListeningToPlayerClicks = function() {
-    page.find('.button').off('click');
+    this.buttons_el.off('click');
   };
 
   Simon.prototype.resetPlayerIndex = function() {
@@ -51,7 +50,7 @@ define(['jquery'], function() {
         .filter('[id=' + this.sequence[i] + ']')
         .addClass('flash')
         .one('animationend MSAnimationEnd webkitAnimationEnd', function() {
-          this.removeClass('flash');
+          $(this).removeClass('flash');
 
           setTimeout(function() {
             _ref.replaySequence(i + 1);
@@ -59,6 +58,8 @@ define(['jquery'], function() {
         }
       );
     } else {
+      this.page.attr('class', 'player-turn');
+
       this.listenToPlayerClicks();
     }
   };
@@ -68,6 +69,8 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.nextRound = function() {
+    this.page.attr('class', 'simon-turn');
+
     this.stopListeningToPlayerClicks();
 
     this.resetPlayerIndex();
@@ -84,9 +87,9 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.gameOver = function() {
-    this.stopListeningToPlayerClicks();
+    this.page.attr('class', 'game-over');
 
-    this.game_over_el.show();
+    this.stopListeningToPlayerClicks();
   };
 
   Simon.prototype.playerPicked = function(color) {
