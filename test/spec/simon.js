@@ -45,6 +45,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         simon = new Simon(page);
         simon.sequence = [ 'blue', 'red', 'red' ];
         simon.playerIndex = 2;
+        simon.stopListeningToPlayerClicks = sinon.spy();
         simon.pickRandomColor = sinon.spy(simon, 'pickRandomColor');
         simon.replaySequence = sinon.spy();
 
@@ -53,6 +54,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       });
 
       // assert
+      it('Simon should not listen to player clicks', function() {
+        simon.stopListeningToPlayerClicks.callCount.should.equal(1);
+      });
+
       it('the player sequence should be emptied', function() {
         simon.playerIndex.should.equal(0);
       });
@@ -82,6 +87,24 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       });
     });
 
+    describe('When Simon finished replaying its color/sound sequence', function() {
+      var simon = null;
+
+      before(function() {
+        // arrange
+        simon = new Simon($('<div>'));
+        simon.sequence = [ 'blue', 'red' ];
+        simon.listenToPlayerClicks = sinon.spy();
+
+        // act
+        simon.replaySequence(2);
+      });
+
+      // assert
+      it('Simon should be listening to player clicks again', function() {
+        simon.listenToPlayerClicks.callCount.should.equal(1);
+      });
+    });
 
     describe("Player's turn", function() {
       describe('When the player click a tile', function() {
@@ -203,12 +226,17 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       page.html('<div id="game-over" style="display: none;"></div>');
 
       simon = new Simon(page);
+      simon.stopListeningToPlayerClicks = sinon.spy();
 
       // act
       simon.gameOver();
     });
 
     // assert
+    it('Simon should not listen to player clicks', function() {
+      simon.stopListeningToPlayerClicks.callCount.should.equal(1);
+    });
+
     it('the "Game over" message should be visible', function() {
       page.find('#game-over').css('display').should.not.equal('none');
     });
