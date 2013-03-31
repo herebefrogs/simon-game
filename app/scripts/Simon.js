@@ -1,14 +1,10 @@
 define(['jquery'], function() {
   var Simon = function Simon(page) {
     this.sequence = [];
-    this.buttons_el = page.find('.controls');
+    this.buttons_el = page.find('.button');
     this.round_el = page.find('#round');
     this.game_over_el = page.find('#game-over');
 
-    var _ref = this;
-    page.find('.button').on('click', function(e) {
-      _ref.playerPicked(e.currentTarget.id);
-    });
     this.game_over_el.hide();
     this.updateRoundNo();
     this.resetPlayerIndex();
@@ -16,6 +12,17 @@ define(['jquery'], function() {
 
   Simon.prototype.getRoundNo = function() {
     return this.sequence.length;
+  };
+
+  Simon.prototype.listenToPlayerClicks = function() {
+    var _ref = this;
+    page.find('.button').on('click', function(e) {
+      _ref.playerPicked(e.currentTarget.id);
+    });
+  };
+
+  Simon.prototype.stopListeningToPlayerClicks = function() {
+    page.find('.button').off('click');
   };
 
   Simon.prototype.resetPlayerIndex = function() {
@@ -39,18 +46,20 @@ define(['jquery'], function() {
   Simon.prototype.replaySequence = function(i) {
     if (i < this.sequence.length) {
       var _ref = this;
-      var button_el = this.buttons_el.find('#' + this.sequence[i]);
 
-      button_el
+      this.buttons_el
+        .filter('[id=' + this.sequence[i] + ']')
         .addClass('flash')
         .one('animationend MSAnimationEnd webkitAnimationEnd', function() {
-          button_el.removeClass('flash');
+          this.removeClass('flash');
 
           setTimeout(function() {
             _ref.replaySequence(i + 1);
           }, 100);
         }
       );
+    } else {
+      this.listenToPlayerClicks();
     }
   };
 
@@ -59,6 +68,8 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.nextRound = function() {
+    this.stopListeningToPlayerClicks();
+
     this.resetPlayerIndex();
 
     this.sequence.push(this.pickRandomColor());
@@ -73,6 +84,8 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.gameOver = function() {
+    this.stopListeningToPlayerClicks();
+
     this.game_over_el.show();
   };
 

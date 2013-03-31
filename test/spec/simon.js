@@ -121,6 +121,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
           );
 
           simon = new Simon(page);
+          simon.listenToPlayerClicks();
           simon.playerPicked = sinon.spy();
 
           // act
