@@ -5,7 +5,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     before(function() {
       // arrange
       page = $('<div>');
-      page.append('<span id="round"></span><div id="game-over"></div>');
+      page.append('<span id="round"></span>');
 
       // act
       simon = new Simon(page);
@@ -27,10 +27,6 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     it('the round number should be displayed on the page', function() {
       page.find('#round').text().should.equal('0');
     });
-
-    it('the "Game over" message should be hidden', function() {
-      page.find('#game-over').css('display').should.equal('none');
-    });
   });
 
   describe('New round', function() {
@@ -39,7 +35,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       before(function() {
         // arrange
-        page = $('<div>');
+        page = $('<html>');
         page.append('<span id="round"></span>');
 
         simon = new Simon(page);
@@ -78,6 +74,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         simon.getRoundNo().should.equal(4);
       });
 
+      it("the page should be in the state Simon's turn", function() {
+        expect(page.attr('class')).to.equal('simon-turn');
+      });
+
       it('the round number should update on the page', function() {
         page.find('#round').text().should.equal('4');
       });
@@ -88,11 +88,13 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     });
 
     describe('When Simon finished replaying its color/sound sequence', function() {
-      var simon = null;
+      var simon = page = null;
 
       before(function() {
         // arrange
-        simon = new Simon($('<div>'));
+        page = $('<html>');
+
+        simon = new Simon(page);
         simon.sequence = [ 'blue', 'red' ];
         simon.listenToPlayerClicks = sinon.spy();
 
@@ -103,6 +105,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       // assert
       it('Simon should be listening to player clicks again', function() {
         simon.listenToPlayerClicks.callCount.should.equal(1);
+      });
+
+      it("the page should be in the state player's turn", function() {
+        expect(page.attr('class')).to.equal('player-turn');
       });
     });
 
@@ -223,8 +229,8 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
     before(function() {
       // arrange
-      page = $('<div>');
-      page.html('<div id="game-over" style="display: none;"></div>');
+      page = $('<html>');
+      page.html('<div id="game-over"></div>');
 
       simon = new Simon(page);
       simon.stopListeningToPlayerClicks = sinon.spy();
@@ -238,8 +244,8 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       simon.stopListeningToPlayerClicks.callCount.should.equal(1);
     });
 
-    it('the "Game over" message should be visible', function() {
-      page.find('#game-over').css('display').should.not.equal('none');
+    it("the page should be in the state Game Over", function() {
+      expect(page.attr('class')).equal('game-over');
     });
   });
 });
