@@ -3,21 +3,32 @@
     <head>
         <meta charset="utf-8">
         <title>Simon</title>
+        <meta name="description" content="web-based Simon game developed following Behavior Driven Development to server as a practical example for my public talk Bug Free Games from Day One with Behavior Driven Development">
         <meta name="viewport" content="width=device-width">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,900" rel="stylesheet" type="text/css">
+        <!-- endbuild -->
     </head>
     <body>
-        <div class="controls">
-          <div id="red" class="button"></div>
-          <div id="green" class="button"></div>
-          <div id="blue" class="button"></div>
-          <div id="yellow" class="button"></div>
+        <div class="title">
         </div>
-        <div>Round #<span id="round"></span></div>
-        <div id="simon-turn">Simon's turn</div>
-        <div id="player-turn">Your turn</div>
-        <div id="game-over">Game over</div>
+        <div class="controls">
+          <div class="round">
+            <div>Round #<span id="round"></span></div>
+          </div>
+          <div id="red" class="tile button"></div>
+          <div id="green" class="tile button"></div>
+          <div id="blue" class="tile button"></div>
+          <div id="yellow" class="tile button"></div>
+          <div class="status">
+            <div id="simon-turn">Simon's turn</div>
+            <div id="player-turn">Your turn</div>
+            <div id="game-over">Game over</div>
+          </div>
+        </div>
 
         <!-- build:js scripts/main.js -->
         <script data-main="scripts/main" src="components/requirejs/require.js"></script>

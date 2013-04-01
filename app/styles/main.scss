@@ -1,6 +1,8 @@
 @import "mixins";
 
 
+$light-blue: #0ac5f4;
+$white: #fff;
 $red-off: #b00;
 $red-on: #f00;
 $green-off: #0b0;
@@ -9,6 +11,12 @@ $blue-off: #009;
 $blue-on: #00f;
 $yellow-off: #bb0;
 $yellow-on: #ff0;
+
+$controls_width: 282.842712475px;
+$controls_half_width: 141.421356237px;
+$margin: 7.071067812px;
+$margin_x_4: 28.2842712px;
+$tile_width: 127.279220614px;
 
 
 @include keyframes(red) {
@@ -34,13 +42,24 @@ $yellow-on: #ff0;
 
 
 // layout
-.controls {
-  width: 400px;
+body {
+  background-color: $light-blue;
+  color: $white;
+  font-family: "lato";
+  font-size: 1.5em;
+}
 
-  .button {
-    width: 180px;
-    height: 180px;
-    margin: 10px;
+.controls {
+  width: $controls_width;
+  position: relative;
+  left: 50%;
+
+  @include transform(translate(-$controls_half_width, 10%) rotate(45deg));
+
+  .tile {
+    width: $tile_width;
+    height: $tile_width;
+    margin: $margin;
     float: left;
   }
 
@@ -74,6 +93,20 @@ $yellow-on: #ff0;
     &.flash {
       @include animation(yellow 1s);
     }
+  }
+}
+
+.status {
+  margin: $margin;
+}
+
+.round {
+  @include transform(translate($margin_x_4, $margin) rotate(-90deg));
+  @include transform-origin(100% 100%);
+
+  div {
+    margin: $margin;
+    text-align: right;
   }
 }
 
@@ -129,4 +162,4 @@ $yellow-on: #ff0;
   #game-over {
     display: block;
   }
-};
+}

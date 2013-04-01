@@ -19,3 +19,24 @@
   -moz-animation: $properties;
   -webkit-animation: $properties;
 }
+
+@mixin transition($properties) {
+  transition: $properties;
+  -ms-transition: $properties;
+  -moz-transition: $properties;
+  -webkit-transition: $properties;
+}
+
+@mixin transform($properties) {
+  transform: $properties;
+  -ms-transform: $properties;
+  -moz-transform: $properties;
+  -webkit-transform: $properties;
+}
+
+@mixin transform-origin($properties) {
+  transform-origin: $properties;
+  -ms-transform-origin: $properties;
+  -moz-transform-origin: $properties;
+  -webkit-transform-origin: $properties;
+}
