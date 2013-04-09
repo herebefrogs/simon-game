@@ -1,4 +1,4 @@
-define([], function() {
+define(['jquery'], function() {
   var Simon = function Simon() {
     this.sequence = [];
   };

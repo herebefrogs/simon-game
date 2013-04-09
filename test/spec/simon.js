@@ -14,11 +14,14 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
   });
 
   describe("On Simon's turn", function() {
-    var game = null;
+    var game = page = null;
 
     before(function() {
       // arrange
-      game = new Simon();
+      page = $('<div>');
+      page.append('<span id="color-count"></span>');
+
+      game = new Simon(page);
       game.pickRandomColor = sinon.spy(game, 'pickRandomColor');
 
       // act
@@ -36,6 +39,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
     it('the new color Simon added to his sequence should be either blue, red, green or yellow', function() {
       [ 'blue', 'red', 'yellow', 'green' ].should.include(game.sequence[0]);
+    });
+
+    it("the page should update the number of colors in Simon's sequence", function() {
+      page.find('#color-count').text().should.equal('1');
     });
   });
 });
