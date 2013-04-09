@@ -23,6 +23,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       game = new Simon(page);
       game.pickRandomColor = sinon.spy(game, 'pickRandomColor');
+      game.replayColorAt = sinon.spy();
 
       // act
       game.newTurn();
@@ -43,6 +44,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
     it("the page should update the number of colors in Simon's sequence", function() {
       page.find('#color-count').text().should.equal('1');
+    });
+
+    it('Simon should start replaying his color sequence from the beginning', function() {
+      game.replayColorAt.firstCall.args[0].should.equal(0);
     });
   });
 });
