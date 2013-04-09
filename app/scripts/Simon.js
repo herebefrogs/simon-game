@@ -12,6 +12,8 @@ define(['jquery'], function() {
     this.sequence.push(this.pickRandomColor());
 
     this.updateColorCount();
+
+    this.replayColorAt(0);
   };
 
   Simon.prototype.pickRandomColor = function() {
@@ -26,6 +28,9 @@ define(['jquery'], function() {
     } else {
       return 'yellow';
     }
+  };
+
+  Simon.prototype.replayColorAt = function(index) {
   };
 
   return Simon;
