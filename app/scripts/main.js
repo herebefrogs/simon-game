@@ -7,7 +7,7 @@ require.config({
 require(['Simon'], function (Simon) {
   'use strict';
 
-  var game = new Simon();
+  var game = new Simon($('body'));
 
   game.newTurn();
 });

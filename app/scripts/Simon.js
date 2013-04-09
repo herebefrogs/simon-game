@@ -1,10 +1,17 @@
 define(['jquery'], function() {
-  var Simon = function Simon() {
+  var Simon = function Simon(page) {
+    this.page = page;
     this.sequence = [];
+  };
+
+  Simon.prototype.updateColorCount = function() {
+    this.page.find('#color-count').text(this.sequence.length);
   };
 
   Simon.prototype.newTurn = function() {
     this.sequence.push(this.pickRandomColor());
+
+    this.updateColorCount();
   };
 
   Simon.prototype.pickRandomColor = function() {
