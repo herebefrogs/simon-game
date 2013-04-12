@@ -1,0 +1,21 @@
+@mixin keyframes($name) {
+  @keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin animation($properties) {
+  animation: $properties;
+  -ms-animation: $properties;
+  -moz-animation: $properties;
+  -webkit-animation: $properties;
+}
