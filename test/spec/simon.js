@@ -94,5 +94,27 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         page.find('#red').hasClass('flash').should.equal(true);
       });
     });
+
+    describe('When the sequence playback completes', function() {
+      var game = null;
+
+      before(function() {
+        // arrange
+        page = $('<div>')
+
+        game = new Simon(page);
+        game.sequence = ['blue', 'red'];
+        game.replayColorAt = sinon.spy(game, 'replayColorAt');
+        clock = sinon.useFakeTimers();
+
+        // act
+        game.replayColorAt(2);
+        clock.tick(1250);
+      });
+
+      it('Simon should be done replaying the color sequence', function() {
+        game.replayColorAt.callCount.should.equal(1);
+      });
+    });
   });
 });
