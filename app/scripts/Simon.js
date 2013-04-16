@@ -31,21 +31,23 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.replayColorAt = function(index) {
-    var _ref = this;
-    var tile = this.page.find('#' + this.sequence[index]);
+    if (index < this.sequence.length) {
+      var _ref = this;
+      var tile = this.page.find('#' + this.sequence[index]);
 
-    tile.addClass('flash');
-
-    setTimeout(function() {
-      // this should trigger approximately when the animation ended
-      tile.removeClass('flash');
+      tile.addClass('flash');
 
       setTimeout(function() {
-        // let 50ms to the browser to effectively remove 'flash' CSS class before adding it back
-        // (if it's immediately added to the same DOM element the 2nd animation won't trigger)
-        _ref.replayColorAt(index + 1);
-      }, 50);
-    }, 1000);
+        // this should trigger approximately when the animation ended
+        tile.removeClass('flash');
+
+        setTimeout(function() {
+          // let 50ms to the browser to effectively remove 'flash' CSS class before adding it back
+          // (if it's immediately added to the same DOM element the 2nd animation won't trigger)
+          _ref.replayColorAt(index + 1);
+        }, 50);
+      }, 1000);
+    }
   };
 
   return Simon;
