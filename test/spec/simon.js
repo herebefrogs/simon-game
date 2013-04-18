@@ -146,5 +146,30 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         game.playerPicked.firstCall.args[0].should.equal('blue');
       });
     });
+
+    describe("When the player matches a color somewhere in Simon's sequence", function() {
+      var game = null;
+
+      before(function() {
+        // arrange
+        page = $('<div>');
+
+        game = new Simon(page);
+        game.sequence = [ 'blue', 'red' ];
+        game.playerSequenceIndex = 0;
+        game.verifyColor = sinon.spy(game, 'verifyColor');
+
+        // act
+        game.playerPicked('blue');
+      });
+
+      it('Simon should verify the color against his color sequence', function() {
+        game.verifyColor.callCount.should.equal(1);
+      });
+
+      it("Simon should add this color at the end of the player's sequence", function() {
+        game.playerSequenceIndex.should.equal(1);
+      });
+    });
   });
 });
