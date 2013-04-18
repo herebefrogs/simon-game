@@ -171,5 +171,26 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         game.playerSequenceIndex.should.equal(1);
       });
     });
+
+    describe("When the player matches the last color in Simon's sequence", function() {
+      var game = null;
+
+      before(function() {
+        // arrange
+        page = $('<div>');
+
+        game = new Simon(page);
+        game.sequence = [ 'blue', 'red' ];
+        game.playerSequenceIndex = 1;
+        game.newTurn = sinon.spy();
+
+        // act
+        game.playerPicked('red');
+      });
+
+      it('Simon should start a new turn', function() {
+        game.newTurn.callCount.should.equal(1);
+      });
+    });
   });
 });
