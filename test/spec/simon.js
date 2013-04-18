@@ -121,4 +121,30 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       });
     });
   });
+
+  describe("On player's turn", function() {
+    describe("When the player clicks a tile", function() {
+      var game = null;
+
+      before(function() {
+        // arrange
+        page = $('<div>');
+        page.append('<div id="blue" class="tile"></div>');
+
+        game = new Simon(page);
+        game.playerPicked = sinon.spy();
+
+        // act
+        page.find('#blue').click();
+      });
+
+      it('Simon should be told the player picked a tile', function() {
+        game.playerPicked.callCount.should.equal(1);
+      });
+
+      it('Simon should be told what color the tile was', function() {
+        game.playerPicked.firstCall.args[0].should.equal('blue');
+      });
+    });
+  });
 });
