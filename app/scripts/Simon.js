@@ -64,11 +64,16 @@ define(['jquery'], function() {
       if (this.playerSequenceIndex === this.sequence.length) {
         this.newTurn();
       }
+    } else {
+      this.endGame();
     }
   };
 
   Simon.prototype.verifyColor = function(color) {
     return this.sequence[this.playerSequenceIndex] === color;
+  };
+
+  Simon.prototype.endGame = function() {
   };
 
   return Simon;
