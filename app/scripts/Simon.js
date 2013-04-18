@@ -9,6 +9,8 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.newTurn = function() {
+    this.playerSequenceIndex = 0;
+
     this.sequence.push(this.pickRandomColor());
 
     this.updateColorCount();
