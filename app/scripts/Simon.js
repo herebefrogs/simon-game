@@ -2,6 +2,11 @@ define(['jquery'], function() {
   var Simon = function Simon(page) {
     this.page = page;
     this.sequence = [];
+
+    var _ref = this;
+    page.find('.tile').on('click', function(e) {
+      _ref.playerPicked(e.currentTarget.id);
+    });
   };
 
   Simon.prototype.updateColorCount = function() {

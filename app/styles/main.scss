@@ -41,6 +41,10 @@ $yellow-on: #ff0;
     height: 180px;
     margin: 10px;
     float: left;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   #red {
@@ -48,6 +52,10 @@ $yellow-on: #ff0;
 
     &.flash {
       @include animation(red 1s);
+    }
+
+    &:active {
+      background-color: $red-on;
     }
   }
 
@@ -57,6 +65,10 @@ $yellow-on: #ff0;
     &.flash {
       @include animation(green 1s);
     }
+
+    &:active {
+      background-color: $green-on;
+    }
   }
 
   #blue {
@@ -65,6 +77,10 @@ $yellow-on: #ff0;
     &.flash {
       @include animation(blue 1s);
     }
+
+    &:active {
+      background-color: $blue-on;
+    }
   }
 
   #yellow {
@@ -72,6 +88,10 @@ $yellow-on: #ff0;
 
     &.flash {
       @include animation(yellow 1s);
+    }
+
+    &:active {
+      background-color: $yellow-on;
     }
   }
 

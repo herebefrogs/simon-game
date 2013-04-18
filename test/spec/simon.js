@@ -4,7 +4,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
     // act
     before(function() {
-      game = new Simon();
+      game = new Simon($('<div>'));
     });
 
     // assert
