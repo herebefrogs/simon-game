@@ -57,5 +57,15 @@ define(['jquery'], function() {
     }
   };
 
+  Simon.prototype.playerPicked = function(color) {
+    if (this.verifyColor(color)) {
+      this.playerSequenceIndex++;
+    }
+  };
+
+  Simon.prototype.verifyColor = function(color) {
+    return this.sequence[this.playerSequenceIndex] === color;
+  };
+
   return Simon;
 });
