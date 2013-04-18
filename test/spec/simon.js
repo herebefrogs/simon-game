@@ -35,6 +35,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       });
 
       // assert
+      it("Simon should empty the player's color sequence", function() {
+        game.playerSequenceIndex.should.equal(0);
+      });
+
       it('Simon should pick a color randomly', function() {
         game.pickRandomColor.callCount.should.equal(1);
       });
