@@ -60,6 +60,10 @@ define(['jquery'], function() {
   Simon.prototype.playerPicked = function(color) {
     if (this.verifyColor(color)) {
       this.playerSequenceIndex++;
+
+      if (this.playerSequenceIndex === this.sequence.length) {
+        this.newTurn();
+      }
     }
   };
 
