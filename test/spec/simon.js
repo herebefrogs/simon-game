@@ -172,6 +172,32 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       });
     });
 
+    describe("When the player misses a color in Simon's sequence", function() {
+      var game = null;
+
+      before(function() {
+        // arrange
+        page = $('<div>');
+
+        game = new Simon(page);
+        game.sequence = [ 'blue', 'red' ];
+        game.playerSequenceIndex = 0;
+        game.verifyColor = sinon.spy(game, 'verifyColor');
+        game.endGame = sinon.spy();
+
+        // act
+        game.playerPicked('yellow');
+      });
+
+      it('Simon should verify the color against his color sequence', function() {
+        game.verifyColor.callCount.should.equal(1);
+      });
+
+      it('Simon should end the game', function() {
+        game.endGame.callCount.should.equal(1);
+      });
+    });
+
     describe("When the player matches the last color in Simon's sequence", function() {
       var game = null;
 
