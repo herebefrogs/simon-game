@@ -14,6 +14,7 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.newTurn = function() {
+    this.page.attr('class', 'simon-turn');
     this.playerSequenceIndex = 0;
 
     this.sequence.push(this.pickRandomColor());
@@ -54,6 +55,8 @@ define(['jquery'], function() {
           _ref.replayColorAt(index + 1);
         }, 50);
       }, 1000);
+    } else {
+      this.page.attr('class', 'player-turn');
     }
   };
 
@@ -74,6 +77,7 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.endGame = function() {
+    this.page.attr('class', 'game-over');
   };
 
   return Simon;
