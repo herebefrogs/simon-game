@@ -19,7 +19,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       before(function() {
         // arrange
-        page = $('<div>');
+        page = $('<div class="">');
         page.append('<span id="color-count"></span>');
         page.append('<div id="blue"></div>' +
                     '<div id="red"></div>' +
@@ -35,6 +35,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       });
 
       // assert
+      it("the page should indicate it's Simon's turn", function() {
+        page.attr('class').should.equal('simon-turn');
+      });
+
       it("Simon should empty the player's color sequence", function() {
         game.playerSequenceIndex.should.equal(0);
       });
@@ -104,7 +108,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       before(function() {
         // arrange
-        page = $('<div>')
+        page = $('<div class="simon-turn">')
 
         game = new Simon(page);
         game.sequence = ['blue', 'red'];
@@ -118,6 +122,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       it('Simon should be done replaying the color sequence', function() {
         game.replayColorAt.callCount.should.equal(1);
+      });
+
+      it("the page should indicate it's the player's turn", function() {
+        page.attr('class').should.equal('player-turn');
       });
     });
   });
@@ -177,13 +185,13 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       before(function() {
         // arrange
-        page = $('<div>');
+        page = $('<div class="player-turn">');
 
         game = new Simon(page);
         game.sequence = [ 'blue', 'red' ];
         game.playerSequenceIndex = 0;
         game.verifyColor = sinon.spy(game, 'verifyColor');
-        game.endGame = sinon.spy();
+        game.endGame = sinon.spy(game, 'endGame');
 
         // act
         game.playerPicked('yellow');
@@ -195,6 +203,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       it('Simon should end the game', function() {
         game.endGame.callCount.should.equal(1);
+      });
+
+      it("the page should indicate the game is over", function() {
+        page.attr('class').should.equal('game-over');
       });
     });
 
