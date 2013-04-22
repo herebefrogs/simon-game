@@ -1,12 +1,8 @@
 define(['jquery'], function() {
   var Simon = function Simon(page) {
     this.page = page;
+    this.tiles = page.find('.tile');
     this.sequence = [];
-
-    var _ref = this;
-    page.find('.tile').on('click', function(e) {
-      _ref.playerPicked(e.currentTarget.id);
-    });
   };
 
   Simon.prototype.updateColorCount = function() {
@@ -14,14 +10,22 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.newTurn = function() {
-    this.page.attr('class', 'simon-turn');
+    this.ignorePlayerClicks();
+
     this.playerSequenceIndex = 0;
+
+    // start Simon's turn
+    this.page.attr('class', 'simon-turn');
 
     this.sequence.push(this.pickRandomColor());
 
     this.updateColorCount();
 
     this.replayColorAt(0);
+  };
+
+  Simon.prototype.ignorePlayerClicks = function() {
+    this.tiles.off('click');
   };
 
   Simon.prototype.pickRandomColor = function() {
@@ -41,7 +45,7 @@ define(['jquery'], function() {
   Simon.prototype.replayColorAt = function(index) {
     if (index < this.sequence.length) {
       var _ref = this;
-      var tile = this.page.find('#' + this.sequence[index]);
+      var tile = this.tiles.filter('[id=' + this.sequence[index] + ']');
 
       tile.addClass('flash');
 
@@ -56,8 +60,18 @@ define(['jquery'], function() {
         }, 50);
       }, 1000);
     } else {
+      // start player's turn
+      this.listenToPlayerClicks();
+
       this.page.attr('class', 'player-turn');
     }
+  };
+
+  Simon.prototype.listenToPlayerClicks = function() {
+    var _ref = this;
+    this.tiles.on('click', function(e) {
+      _ref.playerPicked(e.currentTarget.id);
+    });
   };
 
   Simon.prototype.playerPicked = function(color) {
@@ -77,6 +91,8 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.endGame = function() {
+    this.ignorePlayerClicks();
+
     this.page.attr('class', 'game-over');
   };
 

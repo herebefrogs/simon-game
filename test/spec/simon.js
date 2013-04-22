@@ -177,6 +177,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         game.playerPicked = sinon.spy();
 
         // act
+        game.listenToPlayerClicks();
         page.find('#blue').click();
       });
 
