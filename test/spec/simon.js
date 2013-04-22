@@ -21,12 +21,13 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         // arrange
         page = $('<div class="">');
         page.append('<span id="color-count"></span>');
-        page.append('<div id="blue"></div>' +
-                    '<div id="red"></div>' +
-                    '<div id="green"></div>' +
-                    '<div id="yellow"></div>');
+        page.append('<div id="blue" class="tile"></div>' +
+                    '<div id="red" class="tile"></div>' +
+                    '<div id="green" class="tile"></div>' +
+                    '<div id="yellow" class="tile"></div>');
 
         game = new Simon(page);
+        game.ignorePlayerClicks = sinon.spy();
         game.pickRandomColor = sinon.spy(game, 'pickRandomColor');
         game.replayColorAt = sinon.spy(game, 'replayColorAt');
 
@@ -37,6 +38,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       // assert
       it("the page should indicate it's Simon's turn", function() {
         page.attr('class').should.equal('simon-turn');
+      });
+
+      it('Simon should stop listening to player clicks', function() {
+        game.ignorePlayerClicks.callCount.should.equal(1);
       });
 
       it("Simon should empty the player's color sequence", function() {
@@ -74,10 +79,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       before(function() {
         // arrange
         page = $('<div>')
-        page.append('<div id="blue" class="flash"></div>' +
-                    '<div id="red"></div>' +
-                    '<div id="green"></div>' +
-                    '<div id="yellow"></div>');
+        page.append('<div id="blue" class="tile flash"></div>' +
+                    '<div id="red" class="tile"></div>' +
+                    '<div id="green" class="tile"></div>' +
+                    '<div id="yellow" class="tile"></div>');
 
         game = new Simon(page);
         game.sequence = ['blue', 'red'];
@@ -103,6 +108,30 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       });
     });
 
+    describe('When the player clicks while the sequence plays back', function() {
+      var game = null;
+
+      before(function() {
+        // arrange
+        page = $('<div>');
+        page.append('<div id="blue" class="tile"></div>');
+
+        game = new Simon(page);
+        page.find('#blue').on('click', function() {
+          game.playerPicked('blue');
+        });
+        game.playerPicked = sinon.spy();
+
+        // act
+        game.ignorePlayerClicks();
+        page.find('#blue').click();
+      });
+
+      it('Simon should not be told the player picked a tile', function() {
+        game.playerPicked.callCount.should.equal(0);
+      });
+    });
+
     describe('When the sequence playback completes', function() {
       var game = null;
 
@@ -113,6 +142,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         game = new Simon(page);
         game.sequence = ['blue', 'red'];
         game.replayColorAt = sinon.spy(game, 'replayColorAt');
+        game.listenToPlayerClicks = sinon.spy();
         clock = sinon.useFakeTimers();
 
         // act
@@ -122,6 +152,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       it('Simon should be done replaying the color sequence', function() {
         game.replayColorAt.callCount.should.equal(1);
+      });
+
+      it('Simon should start listening to player clicks', function() {
+        game.listenToPlayerClicks.callCount.should.equal(1);
       });
 
       it("the page should indicate it's the player's turn", function() {
@@ -192,6 +226,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
         game.playerSequenceIndex = 0;
         game.verifyColor = sinon.spy(game, 'verifyColor');
         game.endGame = sinon.spy(game, 'endGame');
+        game.ignorePlayerClicks = sinon.spy();
 
         // act
         game.playerPicked('yellow');
@@ -203,6 +238,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       it('Simon should end the game', function() {
         game.endGame.callCount.should.equal(1);
+      });
+
+      it('Simon should stop listening to player clicks', function() {
+        game.ignorePlayerClicks.callCount.should.equal(1);
       });
 
       it("the page should indicate the game is over", function() {
