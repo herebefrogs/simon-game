@@ -1,6 +1,7 @@
 @import "mixins";
 
-
+$white: #fff;
+$blue: #0ac5f4;
 $red-off: #b00;
 $red-on: #f00;
 $green-off: #0b0;
@@ -32,47 +33,161 @@ $yellow-on: #ff0;
   }
 }
 
-// layout
-.tiles {
-  width: 400px;
 
-  .tile {
+// base
+body {
+  background-color: $blue;
+  color: $white;
+  font-family: 'lato';
+
+  @media (orientation:landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+    font-size: 1.5em;
+  }
+  @media (orientation:landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+    font-size: 1em;
+  }
+}
+
+h1, h2 {
+  font-weight: normal;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1em;
+}
+
+button {
+  color: $white;
+  font-family: 'lato';
+  border: solid 1px $white;
+  background-color: $blue;
+  font-size: 1em;
+  padding: 0;
+
+  @media (orientation:landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+    border-radius: 5px;
+  }
+  @media (orientation:landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+    border-radius: 2.5px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+// layout
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  @include transform(translate(-50%, -50%) rotate(-45deg));
+  @include transform-origin(50% 50%);
+
+  @media (orientation:landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+    width: 400px;
+  }
+
+  @media (orientation:landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+    width: 200px;
+  }
+}
+
+.turns {
+  @media (orientation:landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+    margin-left: 10px;
+  }
+  @media (orientation:landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+    margin-left: 5px;
+  }
+}
+
+.restart {
+  display: none;
+  position: absolute;
+  left: 50%;
+
+  @media (orientation:landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+    width: 380px;
+    bottom: 10px;
+    margin-left: -190px;
+  }
+  @media (orientation:landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+    width: 190px;
+    bottom: 5px;
+    margin-left: -95px;
+  }
+}
+
+.score {
+  text-align: right;
+  @media (orientation:landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+    @include transform(rotate(90deg) translate(-25px, -15px));
+  }
+  @media (orientation:landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+    @include transform(rotate(90deg) translate(-12.5px, -7.5px));
+  }
+  @include transform-origin(100% 50%);
+}
+
+.tiles {
+  @media (orientation:landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+    height: 400px;
+  }
+  @media (orientation:landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+    height: 200px;
+  }
+}
+
+.tile {
+  @media (orientation:landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
     width: 180px;
     height: 180px;
     margin: 10px;
-    float: left;
   }
-
-  #red {
-    background-color: $red-off;
-
-    &.flash {
-      @include animation(red 1s);
-    }
+  @media (orientation:landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+    width: 90px;
+    height: 90px;
+    margin: 5px;
   }
+  float: left;
+}
 
-  #green {
-    background-color: $green-off;
+#red {
+  background-color: $red-off;
 
-    &.flash {
-      @include animation(green 1s);
-    }
+  &.flash {
+    @include animation(red 1s);
   }
+}
 
-  #blue {
-    background-color: $blue-off;
+#green {
+  background-color: $green-off;
 
-    &.flash {
-      @include animation(blue 1s);
-    }
+  &.flash {
+    @include animation(green 1s);
   }
+}
 
-  #yellow {
-    background-color: $yellow-off;
+#blue {
+  background-color: $blue-off;
 
-    &.flash {
-      @include animation(yellow 1s);
-    }
+  &.flash {
+    @include animation(blue 1s);
+  }
+}
+
+#yellow {
+  background-color: $yellow-off;
+
+  &.flash {
+    @include animation(yellow 1s);
   }
 }
 
@@ -118,5 +233,9 @@ $yellow-on: #ff0;
 .game-over {
   #game-over-msg {
     display: inline;
+  }
+
+  .restart {
+    display: block;
   }
 }

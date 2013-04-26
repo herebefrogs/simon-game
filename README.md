@@ -3,6 +3,8 @@ Web-based Simon game
 
 This game is developed using the Behavior Driven Development methodology. It serves as a practical example to illustrate my public talk 'Bug-Free Games from Day One with Behavior Driven Development'.
 
+Play this Simon game at [jerle76.github.io/simon-game/](http://jerle76.github.io/simon-game/)
+
 Repository structure
 --------------------
 

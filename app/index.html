@@ -3,24 +3,33 @@
     <head>
         <meta charset="utf-8">
         <title>Simon</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="web-based Simon game developed following Behaviour-Driven Development to server as a practical example for my public talk Bug-Free Games from Day One with Behaviour-Driven Development">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,900" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="styles/main.css">
     </head>
     <body class="simon-turn">
-        <div>
-          <span id="simon-turn-msg">Simon's turn</span>
-          <span id="player-turn-msg">Player's turn</span>
-          <span id="game-over-msg">Game over</span>
+        <h1>Simon called</h1>
+        <h2>(he wants his colors back...)</h2>
+        <div class="container">
+          <div class="turns">
+            <span id="simon-turn-msg">Simon's turn</span>
+            <span id="player-turn-msg">Player's turn</span>
+            <span id="game-over-msg">Game over</span>
+          </div>
+          <div class="tiles">
+            <div id="blue" class="tile"></div>
+            <div id="red" class="tile"></div>
+            <div id="green" class="tile"></div>
+            <div id="yellow" class="tile"></div>
+          </div>
+          <div class="score">
+            <span id="color-count"></span> color(s)
+          </div>
         </div>
-        <div><span id="color-count"></span> color(s)</div>
         <button class="restart">Restart</button>
-        <div class="tiles">
-          <div id="blue" class="tile"></div>
-          <div id="red" class="tile"></div>
-          <div id="green" class="tile"></div>
-          <div id="yellow" class="tile"></div>
-        </div>
 
         <!-- build:js scripts/main.js -->
         <script data-main="scripts/main" src="components/requirejs/require.js"></script>
