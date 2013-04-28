@@ -9,5 +9,5 @@ require(['Simon'], function (Simon) {
 
   var game = new Simon($('body'));
 
-  game.newTurn();
+  game.newGame();
 });

@@ -2,7 +2,17 @@ define(['jquery'], function() {
   var Simon = function Simon(page) {
     this.page = page;
     this.tiles = page.find('.tile');
+
+    var _ref = this;
+    page.find('.restart').on('click', function() {
+      _ref.newGame();
+    });
+  };
+
+  Simon.prototype.newGame = function() {
     this.sequence = [];
+
+    this.newTurn();
   };
 
   Simon.prototype.updateColorCount = function() {
