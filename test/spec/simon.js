@@ -2,14 +2,23 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
   describe('On game start', function () {
     var game = null;
 
-    // act
     before(function() {
-      game = new Simon($('<div>'));
+      // arrange
+      var page = $('<div>');
+      game = new Simon(page);
+      game.newTurn = sinon.spy();
+
+      // act
+      game.newGame();
     });
 
     // assert
     it("Simon's color sequence should be empty", function() {
       game.sequence.should.have.length(0);
+    });
+
+    it('Simon should start a new tun', function() {
+      game.newTurn.callCount.should.equal(1);
     });
   });
 
@@ -27,6 +36,7 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
                     '<div id="yellow" class="tile"></div>');
 
         game = new Simon(page);
+        game.sequence = [];
         game.ignorePlayerClicks = sinon.spy();
         game.pickRandomColor = sinon.spy(game, 'pickRandomColor');
         game.replayColorAt = sinon.spy(game, 'replayColorAt');
@@ -268,6 +278,27 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       it('Simon should start a new turn', function() {
         game.newTurn.callCount.should.equal(1);
+      });
+    });
+  });
+
+  describe('On game end', function() {
+    describe('When the player clicks the restart button', function () {
+      var game = null;
+      before(function() {
+        // arrange
+        var page = $('<div class="game-over">');
+        page.append('<button class="restart">Restart</button>');
+
+        game = new Simon(page);
+        game.newGame = sinon.spy();
+
+        // act
+        page.find('.restart').click();
+      });
+
+      it('Simon should start a new game', function() {
+        game.newGame.callCount.should.equal(1);
       });
     });
   });
