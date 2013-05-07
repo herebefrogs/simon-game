@@ -1,0 +1,330 @@
+@keyframes red {
+  50% {
+    background-color: red;
+  }
+}
+
+@-ms-keyframes red {
+  50% {
+    background-color: red;
+  }
+}
+
+@-moz-keyframes red {
+  50% {
+    background-color: red;
+  }
+}
+
+@-webkit-keyframes red {
+  50% {
+    background-color: red;
+  }
+}
+
+@keyframes green {
+  50% {
+    background-color: lime;
+  }
+}
+
+@-ms-keyframes green {
+  50% {
+    background-color: lime;
+  }
+}
+
+@-moz-keyframes green {
+  50% {
+    background-color: lime;
+  }
+}
+
+@-webkit-keyframes green {
+  50% {
+    background-color: lime;
+  }
+}
+
+@keyframes blue {
+  50% {
+    background-color: blue;
+  }
+}
+
+@-ms-keyframes blue {
+  50% {
+    background-color: blue;
+  }
+}
+
+@-moz-keyframes blue {
+  50% {
+    background-color: blue;
+  }
+}
+
+@-webkit-keyframes blue {
+  50% {
+    background-color: blue;
+  }
+}
+
+@keyframes yellow {
+  50% {
+    background-color: yellow;
+  }
+}
+
+@-ms-keyframes yellow {
+  50% {
+    background-color: yellow;
+  }
+}
+
+@-moz-keyframes yellow {
+  50% {
+    background-color: yellow;
+  }
+}
+
+@-webkit-keyframes yellow {
+  50% {
+    background-color: yellow;
+  }
+}
+
+body {
+  background-color: #0ac5f4;
+  color: white;
+  font-family: 'lato';
+}
+@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+  body {
+    font-size: 1.5em;
+  }
+}
+@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+  body {
+    font-size: 1em;
+  }
+}
+
+h1, h2 {
+  font-weight: normal;
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1em;
+}
+
+button {
+  color: white;
+  font-family: 'lato';
+  border: solid 1px white;
+  background-color: #0ac5f4;
+  font-size: 1em;
+  padding: 0;
+}
+@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+  button {
+    border-radius: 5px;
+  }
+}
+@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+  button {
+    border-radius: 2.5px;
+  }
+}
+button:hover {
+  cursor: pointer;
+}
+
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  -ms-transform: translate(-50%, -50%) rotate(-45deg);
+  -moz-transform: translate(-50%, -50%) rotate(-45deg);
+  -webkit-transform: translate(-50%, -50%) rotate(-45deg);
+  transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -webkit-transform-origin: 50% 50%;
+}
+@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+  .container {
+    width: 400px;
+  }
+}
+@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+  .container {
+    width: 200px;
+  }
+}
+
+@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+  .turns {
+    margin-left: 10px;
+  }
+}
+@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+  .turns {
+    margin-left: 5px;
+  }
+}
+
+.restart {
+  display: none;
+  position: absolute;
+  left: 50%;
+}
+@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+  .restart {
+    width: 380px;
+    bottom: 10px;
+    margin-left: -190px;
+  }
+}
+@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+  .restart {
+    width: 190px;
+    bottom: 5px;
+    margin-left: -95px;
+  }
+}
+
+.score {
+  text-align: right;
+  transform-origin: 100% 50%;
+  -ms-transform-origin: 100% 50%;
+  -moz-transform-origin: 100% 50%;
+  -webkit-transform-origin: 100% 50%;
+}
+@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+  .score {
+    transform: rotate(90deg) translate(-25px, -15px);
+    -ms-transform: rotate(90deg) translate(-25px, -15px);
+    -moz-transform: rotate(90deg) translate(-25px, -15px);
+    -webkit-transform: rotate(90deg) translate(-25px, -15px);
+  }
+}
+@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+  .score {
+    transform: rotate(90deg) translate(-12.5px, -7.5px);
+    -ms-transform: rotate(90deg) translate(-12.5px, -7.5px);
+    -moz-transform: rotate(90deg) translate(-12.5px, -7.5px);
+    -webkit-transform: rotate(90deg) translate(-12.5px, -7.5px);
+  }
+}
+
+@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+  .tiles {
+    height: 400px;
+  }
+}
+@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+  .tiles {
+    height: 200px;
+  }
+}
+
+.tile {
+  float: left;
+}
+@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
+  .tile {
+    width: 180px;
+    height: 180px;
+    margin: 10px;
+  }
+}
+@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
+  .tile {
+    width: 90px;
+    height: 90px;
+    margin: 5px;
+  }
+}
+
+#red {
+  background-color: #bb0000;
+}
+#red.flash {
+  animation: red 1s;
+  -ms-animation: red 1s;
+  -moz-animation: red 1s;
+  -webkit-animation: red 1s;
+}
+
+#green {
+  background-color: #00bb00;
+}
+#green.flash {
+  animation: green 1s;
+  -ms-animation: green 1s;
+  -moz-animation: green 1s;
+  -webkit-animation: green 1s;
+}
+
+#blue {
+  background-color: #000099;
+}
+#blue.flash {
+  animation: blue 1s;
+  -ms-animation: blue 1s;
+  -moz-animation: blue 1s;
+  -webkit-animation: blue 1s;
+}
+
+#yellow {
+  background-color: #bbbb00;
+}
+#yellow.flash {
+  animation: yellow 1s;
+  -ms-animation: yellow 1s;
+  -moz-animation: yellow 1s;
+  -webkit-animation: yellow 1s;
+}
+
+#simon-turn-msg,
+#player-turn-msg,
+#game-over-msg {
+  display: none;
+}
+
+.simon-turn #simon-turn-msg {
+  display: inline;
+}
+
+.player-turn #player-turn-msg {
+  display: inline;
+}
+.player-turn .tile:hover {
+  cursor: pointer;
+}
+.player-turn #red:active {
+  background-color: red;
+}
+.player-turn #green:active {
+  background-color: lime;
+}
+.player-turn #blue:active {
+  background-color: blue;
+}
+.player-turn #yellow:active {
+  background-color: yellow;
+}
+
+.game-over #game-over-msg {
+  display: inline;
+}
+.game-over .restart {
+  display: block;
+}

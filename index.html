@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Simon</title>
+        <meta name="description" content="web-based Simon game developed following Behaviour-Driven Development to server as a practical example for my public talk Bug-Free Games from Day One with Behaviour-Driven Development">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link href="http://fonts.googleapis.com/css?family=Lato:300,900" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="styles/main.css">
+    </head>
+    <body class="simon-turn">
+        <h1>Simon called</h1>
+        <h2>(he wants his colors back...)</h2>
+        <div class="container">
+          <div class="turns">
+            <span id="simon-turn-msg">Simon's turn</span>
+            <span id="player-turn-msg">Player's turn</span>
+            <span id="game-over-msg">Game over</span>
+          </div>
+          <div class="tiles">
+            <div id="blue" class="tile"></div>
+            <div id="red" class="tile"></div>
+            <div id="green" class="tile"></div>
+            <div id="yellow" class="tile"></div>
+          </div>
+          <div class="score">
+            <span id="color-count"></span> color(s)
+          </div>
+        </div>
+        <button class="restart">Restart</button>
+
+        <!-- build:js scripts/main.js -->
+        <script data-main="scripts/main" src="components/requirejs/require.js"></script>
+        <!-- endbuild -->
+
+        <script type="text/javascript">
+          var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+          document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+          var pageTracker = _gat._getTracker("UA-39675296-1");
+          pageTracker._trackPageview();
+        </script>
+</body>
+</html>
