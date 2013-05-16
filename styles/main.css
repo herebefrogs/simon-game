@@ -126,20 +126,11 @@ h2 {
 button {
   color: white;
   font-family: 'lato';
-  border: solid 1px white;
+  border: solid 0px white;
   background-color: #0ac5f4;
   font-size: 1em;
   padding: 0;
-}
-@media (orientation: landscape) and (min-height: 600px), (orientation: portrait) and (min-width: 600px) {
-  button {
-    border-radius: 5px;
-  }
-}
-@media (orientation: landscape) and (max-height: 599px), (orientation: portrait) and (max-width: 599px) {
-  button {
-    border-radius: 2.5px;
-  }
+  text-decoration: underline;
 }
 button:hover {
   cursor: pointer;
@@ -334,4 +325,14 @@ button:hover {
   top: 0;
   right: 0;
   border: 0;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 0;
+  color: white;
+  padding-bottom: 0.67em;
+  padding-right: 0.67em;
 }
