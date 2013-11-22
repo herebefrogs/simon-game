@@ -4,6 +4,9 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
     before(function() {
       // arrange
+      _gaq = [];
+      sinon.spy(_gaq, 'push');
+
       var page = $('<div>');
       game = new Simon(page);
       game.newTurn = sinon.spy();
@@ -20,6 +23,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
     it('Simon should start a new tun', function() {
       game.newTurn.callCount.should.equal(1);
     });
+
+    it('Simon should track a "start" page view', function() {
+      _gaq.push.calledWith([ '_trackPageview', '/simon-game/start' ]).should.equal(true);
+    });
   });
 
   describe("On Simon's turn", function() {
@@ -28,6 +35,9 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       before(function() {
         // arrange
+        _gaq = [];
+        sinon.spy(_gaq, 'push');
+
         page = $('<div class="">');
         page.append('<span id="color-count"></span>');
         page.append('<div id="blue" class="tile"></div>' +
@@ -80,6 +90,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       it('Simon should animate the tile matching the new color', function() {
         page.find('#' + game.sequence[0]).hasClass('flash').should.equal(true);
+      });
+
+      it('Simon should track a "newturn" event with current score', function() {
+        _gaq.push.calledWith([ '_trackEvent', 'game', 'newturn', 'score:1', 1 ]).should.equal(true);
       });
     });
 
@@ -230,6 +244,9 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       before(function() {
         // arrange
+        _gaq = [];
+        sinon.spy(_gaq, 'push');
+
         page = $('<div class="player-turn">');
 
         game = new Simon(page);
@@ -257,6 +274,14 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       it("the page should indicate the game is over", function() {
         page.attr('class').should.equal('game-over');
+      });
+
+      it('Simon should track a "end" page view', function() {
+        _gaq.push.calledWith([ '_trackPageview', '/simon-game/end' ]).should.equal(true);
+      });
+
+      it('Simon should track a "end" event with final score', function() {
+        _gaq.push.calledWith([ '_trackEvent', 'game', 'end', 'score:2', 1 ]).should.equal(true);
       });
     });
 
@@ -287,6 +312,9 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
       var game = null;
       before(function() {
         // arrange
+        _gaq = [];
+        sinon.spy(_gaq, 'push');
+
         var page = $('<div class="game-over">');
         page.append('<button class="restart">Restart</button>');
 
@@ -299,6 +327,10 @@ define(['app/Simon', 'lib/sinon-1.6.0'], function (Simon) {
 
       it('Simon should start a new game', function() {
         game.newGame.callCount.should.equal(1);
+      });
+
+      it('Simon should track a "restart" page view', function() {
+        _gaq.push.calledWith([ '_trackPageview', '/simon-game/restart' ]).should.equal(true);
       });
     });
   });

@@ -36,17 +36,18 @@
         <button class="restart">Restart</button>
         <a class="bottom-right" href="tests.html">Run tests</a>
 
+        <script>
+          var _gaq = _gaq || [];
+          _gaq.push([ '_setAccount', 'UA-39675296-1' ]);
+        </script>
+
         <!-- build:js scripts/main.js -->
         <script data-main="scripts/main" src="lib/requirejs/require.js"></script>
         <!-- endbuild -->
 
         <script type="text/javascript">
           var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-          document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        </script>
-        <script type="text/javascript">
-          var pageTracker = _gat._getTracker("UA-39675296-1");
-          pageTracker._trackPageview();
+          document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript' async='true'%3E%3C/script%3E"));
         </script>
 </body>
 </html>

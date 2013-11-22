@@ -5,11 +5,15 @@ define(['jquery'], function() {
 
     var _ref = this;
     page.find('.restart').on('click', function() {
+      _gaq.push([ '_trackPageview', '/simon-game/restart' ]);
+
       _ref.newGame();
     });
   };
 
   Simon.prototype.newGame = function() {
+    _gaq.push([ '_trackPageview', '/simon-game/start' ]);
+
     this.sequence = [];
 
     this.newTurn();
@@ -29,6 +33,7 @@ define(['jquery'], function() {
 
     this.sequence.push(this.pickRandomColor());
 
+    _gaq.push([ '_trackEvent', 'game', 'newturn', 'score:' + this.sequence.length, 1 ]);
     this.updateColorCount();
 
     this.replayColorAt(0);
@@ -101,6 +106,9 @@ define(['jquery'], function() {
   };
 
   Simon.prototype.endGame = function() {
+    _gaq.push([ '_trackPageview', '/simon-game/end' ]);
+    _gaq.push([ '_trackEvent', 'game', 'end', 'score:' + this.sequence.length, 1 ]);
+
     this.ignorePlayerClicks();
 
     this.page.attr('class', 'game-over');
